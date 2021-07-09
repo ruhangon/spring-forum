@@ -1,4 +1,12 @@
-# spring-forum
+# Spring Fórum
 
-Projeto de fórum feito em spring, baseado no estilo de fórum da plataforma Alura
+Projeto de fórum em back-end construído usando:
+
+- Spring Boot
+
+- Spring Security
+
+- Spring Data JPA com MySQL
+
+A linguagem de programação utilizada foi Java na versão 8.
 
