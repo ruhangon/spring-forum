@@ -19,14 +19,14 @@ public class Resposta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String mensagem;
+	private Integer votos = 0;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
-	private Boolean solucao = false;
 
 	@ManyToOne
 	private Topico topico;
 
 	@ManyToOne
-	private Usuario autor;
+	private Usuario usuario;
 
 	@Override
 	public int hashCode() {

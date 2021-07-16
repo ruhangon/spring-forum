@@ -22,7 +22,7 @@ public class TopicoDto {
 		this.dataCriacao = topico.getDataCriacao();
 	}
 
-	public static Page<TopicoDto> converter(Page<Topico> topicos) {
+	public static Page<TopicoDto> converte(Page<Topico> topicos) {
 		return topicos.map(TopicoDto::new);
 	}
 

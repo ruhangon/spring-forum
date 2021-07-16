@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,15 @@ public class Usuario implements UserDetails {
 	private String nome;
 	private String email;
 	private String senha;
+	private Byte nivel = 1;
+	private Integer experiencia = 0;
+
+	@OneToMany(mappedBy = "usuario")
+	private List<Topico> topicos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "usuario")
+	private List<Resposta> respostas = new ArrayList<>();
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 

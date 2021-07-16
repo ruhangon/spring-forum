@@ -11,7 +11,7 @@ public class LoginForm {
 	private String email;
 	private String senha;
 
-	public UsernamePasswordAuthenticationToken converter() {
+	public UsernamePasswordAuthenticationToken converte() {
 		return new UsernamePasswordAuthenticationToken(email, senha);
 	}
 

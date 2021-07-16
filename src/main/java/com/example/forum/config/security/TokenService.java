@@ -20,11 +20,11 @@ public class TokenService {
 	@Value("${forum.jwt.secret}")
 	private String secret;
 
-	public String gerarToken(Authentication authentication) {
+	public String geraToken(Authentication authentication) {
 		Usuario logado = (Usuario) authentication.getPrincipal();
 		Date hoje = new Date();
 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
-		return Jwts.builder().setIssuer("API do Fórum da Alura").setSubject(logado.getId().toString()).setIssuedAt(hoje)
+		return Jwts.builder().setIssuer("API de fórum").setSubject(logado.getId().toString()).setIssuedAt(hoje)
 				.setExpiration(dataExpiracao).signWith(SignatureAlgorithm.HS256, secret).compact();
 	}
 

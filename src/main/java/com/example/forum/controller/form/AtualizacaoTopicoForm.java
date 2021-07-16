@@ -13,13 +13,13 @@ import lombok.Setter;
 @Setter
 public class AtualizacaoTopicoForm {
 	@NotBlank(message = "o campo titulo está em branco")
-	@Size(min = 5, max = 100, message = "o campo titulo precisa ter entre 5 e 100 caracteres")
+	@Size(min = 5, max = 100, message = "o campo titulo precisa ter entre {min} e {max} caracteres")
 	private String titulo;
 	@NotBlank(message = "o campo mensagem está em branco")
-	@Size(min = 1, max = 1000, message = "o campo mensagem precisa ter entre 1 e 1000 caracteres")
+	@Size(min = 1, max = 1000, message = "o campo mensagem precisa ter entre {min} e {max} caracteres")
 	private String mensagem;
 
-	public Topico atualizar(Long id, TopicoRepository topicoRepository) {
+	public Topico atualiza(Long id, TopicoRepository topicoRepository) {
 		Topico topico = topicoRepository.getOne(id);
 		topico.setTitulo(this.titulo);
 		topico.setMensagem(this.mensagem);

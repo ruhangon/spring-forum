@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.forum.model.StatusTopico;
 import com.example.forum.model.Topico;
 
 import lombok.Getter;
@@ -16,8 +15,8 @@ public class DetalhesDoTopicoDto {
 	private String titulo;
 	private String mensagem;
 	private LocalDateTime dataCriacao;
-	private String nomeAutor;
-	private StatusTopico status;
+	private Boolean aberto;
+	private String nomeUsuario;
 	private List<RespostaDto> respostas;
 
 	public DetalhesDoTopicoDto(Topico topico) {
@@ -25,8 +24,8 @@ public class DetalhesDoTopicoDto {
 		this.titulo = topico.getTitulo();
 		this.mensagem = topico.getMensagem();
 		this.dataCriacao = topico.getDataCriacao();
-		this.nomeAutor = topico.getAutor().getNome();
-		this.status = topico.getStatus();
+		this.aberto = topico.getAberto();
+		this.nomeUsuario = topico.getUsuario().getNome();
 		this.respostas = new ArrayList<>();
 		this.respostas.addAll(topico.getRespostas().stream().map(RespostaDto::new).collect(Collectors.toList()));
 	}
