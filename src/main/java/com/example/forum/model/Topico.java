@@ -25,8 +25,8 @@ public class Topico {
 	private Long id;
 	private String titulo;
 	private String mensagem;
-	private LocalDateTime dataCriacao = LocalDateTime.now();
-	private Boolean aberto = true;
+	private LocalDateTime dataCriacao;
+	private Boolean aberto;
 
 	@ManyToOne
 	private Usuario usuario;
@@ -34,9 +34,12 @@ public class Topico {
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
 
-	public Topico(String titulo, String mensagem) {
+	public Topico(String titulo, String mensagem, Usuario usuario) {
 		this.titulo = titulo;
 		this.mensagem = mensagem;
+		this.dataCriacao = LocalDateTime.now();
+		this.aberto = true;
+		this.usuario = usuario;
 	}
 
 	@Override

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.forum.model.Resposta;
 
 public interface RespostaRepository extends JpaRepository<Resposta, Long> {
-	Page<Resposta> findByTopicoTitulo(String tituloTopico, Pageable paginacao);
+	Page<Resposta> findByTopicoId(Long idTopico, Pageable paginacao);
 
 }

@@ -12,14 +12,18 @@ import lombok.Getter;
 public class TopicoDto {
 	private Long id;
 	private String titulo;
-	private String mensagem;
 	private LocalDateTime dataCriacao;
+	private Boolean aberto;
+	private String nomeUsuario;
+	private Integer numeroRespostas;
 
 	public TopicoDto(Topico topico) {
 		this.id = topico.getId();
 		this.titulo = topico.getTitulo();
-		this.mensagem = topico.getMensagem();
 		this.dataCriacao = topico.getDataCriacao();
+		this.aberto = topico.getAberto();
+		this.nomeUsuario = topico.getUsuario().getNome();
+		this.numeroRespostas = topico.getRespostas().size();
 	}
 
 	public static Page<TopicoDto> converte(Page<Topico> topicos) {

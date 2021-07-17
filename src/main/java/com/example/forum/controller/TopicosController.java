@@ -28,12 +28,16 @@ import com.example.forum.controller.form.AtualizacaoTopicoForm;
 import com.example.forum.controller.form.TopicoForm;
 import com.example.forum.model.Topico;
 import com.example.forum.repository.TopicoRepository;
+import com.example.forum.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/topicos")
 public class TopicosController {
 	@Autowired
 	private TopicoRepository topicoRepository;
+
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@GetMapping
 	public Page<TopicoDto> lista(
@@ -54,7 +58,7 @@ public class TopicosController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<TopicoDto> cadastra(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
-		Topico topico = form.converte();
+		Topico topico = form.converte(usuarioRepository);
 		topicoRepository.save(topico);
 		URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 		return ResponseEntity.created(uri).body(new TopicoDto(topico));

@@ -17,6 +17,8 @@ public class DetalhesTopicoDto {
 	private LocalDateTime dataCriacao;
 	private Boolean aberto;
 	private String nomeUsuario;
+	private Byte nivelUsuario;
+	private Integer experienciaUsuario;
 	private List<RespostaDto> respostas;
 
 	public DetalhesTopicoDto(Topico topico) {
@@ -26,6 +28,8 @@ public class DetalhesTopicoDto {
 		this.dataCriacao = topico.getDataCriacao();
 		this.aberto = topico.getAberto();
 		this.nomeUsuario = topico.getUsuario().getNome();
+		this.nivelUsuario = topico.getUsuario().getNivel();
+		this.experienciaUsuario = topico.getUsuario().getExperiencia();
 		this.respostas = new ArrayList<>();
 		this.respostas.addAll(topico.getRespostas().stream().map(RespostaDto::new).collect(Collectors.toList()));
 	}

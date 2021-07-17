@@ -33,7 +33,7 @@ public class Resposta {
 	public Resposta(String mensagem, Topico topico, Usuario usuario) {
 		this.mensagem = mensagem;
 		this.votos = 0;
-		this.dataCriacao = dataCriacao.now();
+		this.dataCriacao = LocalDateTime.now();
 		this.topico = topico;
 		this.usuario = usuario;
 	}

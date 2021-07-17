@@ -44,15 +44,10 @@ public class RespostasController {
 	private UsuarioRepository usuarioRepository;
 
 	@GetMapping
-	public Page<RespostaDto> lista(@RequestParam(required = false) String tituloTopico,
+	public Page<RespostaDto> lista(@RequestParam(required = true) Long idTopico,
 			@PageableDefault(sort = "id", direction = Direction.ASC, page = 0, size = 20) Pageable paginacao) {
-		if (tituloTopico == null) {
-			Page<Resposta> respostas = respostaRepository.findAll(paginacao);
-			return RespostaDto.converte(respostas);
-		} else {
-			Page<Resposta> respostas = respostaRepository.findByTopicoTitulo(tituloTopico, paginacao);
-			return RespostaDto.converte(respostas);
-		}
+		Page<Resposta> respostas = respostaRepository.findByTopicoId(idTopico, paginacao);
+		return RespostaDto.converte(respostas);
 	}
 
 	@GetMapping("/{id}")
