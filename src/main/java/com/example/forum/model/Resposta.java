@@ -9,24 +9,34 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 public class Resposta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String mensagem;
-	private Integer votos = 0;
-	private LocalDateTime dataCriacao = LocalDateTime.now();
+	private Integer votos;
+	private LocalDateTime dataCriacao;
 
 	@ManyToOne
 	private Topico topico;
 
 	@ManyToOne
 	private Usuario usuario;
+
+	public Resposta(String mensagem, Topico topico, Usuario usuario) {
+		this.mensagem = mensagem;
+		this.votos = 0;
+		this.dataCriacao = dataCriacao.now();
+		this.topico = topico;
+		this.usuario = usuario;
+	}
 
 	@Override
 	public int hashCode() {

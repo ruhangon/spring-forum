@@ -10,7 +10,7 @@ import com.example.forum.model.Topico;
 import lombok.Getter;
 
 @Getter
-public class DetalhesDoTopicoDto {
+public class DetalhesTopicoDto {
 	private Long id;
 	private String titulo;
 	private String mensagem;
@@ -19,7 +19,7 @@ public class DetalhesDoTopicoDto {
 	private String nomeUsuario;
 	private List<RespostaDto> respostas;
 
-	public DetalhesDoTopicoDto(Topico topico) {
+	public DetalhesTopicoDto(Topico topico) {
 		this.id = topico.getId();
 		this.titulo = topico.getTitulo();
 		this.mensagem = topico.getMensagem();

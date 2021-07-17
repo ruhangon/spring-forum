@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.example.forum.controller.dto.DetalhesDoTopicoDto;
+import com.example.forum.controller.dto.DetalhesTopicoDto;
 import com.example.forum.controller.dto.TopicoDto;
 import com.example.forum.controller.form.AtualizacaoTopicoForm;
 import com.example.forum.controller.form.TopicoForm;
@@ -43,10 +43,10 @@ public class TopicosController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<DetalhesDoTopicoDto> detalha(@PathVariable Long id) {
+	public ResponseEntity<DetalhesTopicoDto> detalha(@PathVariable Long id) {
 		Optional<Topico> topico = topicoRepository.findById(id);
 		if (topico.isPresent()) {
-			return ResponseEntity.ok(new DetalhesDoTopicoDto(topico.get()));
+			return ResponseEntity.ok(new DetalhesTopicoDto(topico.get()));
 		}
 		return ResponseEntity.notFound().build();
 	}
