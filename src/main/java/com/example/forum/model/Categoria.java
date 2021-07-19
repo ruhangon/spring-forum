@@ -1,6 +1,5 @@
 package com.example.forum.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -19,31 +17,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Topico {
+public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String titulo;
-	private String mensagem;
-	private LocalDateTime dataCriacao;
-	private Boolean aberto;
+	private String nome;
 
-	@ManyToOne
-	private Categoria categoria;
+	@OneToMany(mappedBy = "categoria")
+	private List<Topico> topicos = new ArrayList<>();
 
-	@ManyToOne
-	private Usuario usuario;
-
-	@OneToMany(mappedBy = "topico")
-	private List<Resposta> respostas = new ArrayList<>();
-
-	public Topico(String titulo, String mensagem, Categoria categoria, Usuario usuario) {
-		this.titulo = titulo;
-		this.mensagem = mensagem;
-		this.dataCriacao = LocalDateTime.now();
-		this.aberto = true;
-		this.categoria = categoria;
-		this.usuario = usuario;
+	public Categoria(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
@@ -62,7 +46,7 @@ public class Topico {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Topico other = (Topico) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

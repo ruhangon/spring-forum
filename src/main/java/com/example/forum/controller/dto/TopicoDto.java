@@ -14,6 +14,7 @@ public class TopicoDto {
 	private String titulo;
 	private LocalDateTime dataCriacao;
 	private Boolean aberto;
+	private String nomeCategoria;
 	private String nomeUsuario;
 	private Integer numeroRespostas;
 
@@ -22,6 +23,7 @@ public class TopicoDto {
 		this.titulo = topico.getTitulo();
 		this.dataCriacao = topico.getDataCriacao();
 		this.aberto = topico.getAberto();
+		this.nomeCategoria = topico.getCategoria().getNome();
 		this.nomeUsuario = topico.getUsuario().getNome();
 		this.numeroRespostas = topico.getRespostas().size();
 	}

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,6 +28,7 @@ import com.example.forum.controller.dto.TopicoDto;
 import com.example.forum.controller.form.AtualizacaoTopicoForm;
 import com.example.forum.controller.form.TopicoForm;
 import com.example.forum.model.Topico;
+import com.example.forum.repository.CategoriaRepository;
 import com.example.forum.repository.TopicoRepository;
 import com.example.forum.repository.UsuarioRepository;
 
@@ -37,12 +39,15 @@ public class TopicosController {
 	private TopicoRepository topicoRepository;
 
 	@Autowired
+	private CategoriaRepository categoriaRepository;
+
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@GetMapping
-	public Page<TopicoDto> lista(
+	public Page<TopicoDto> lista(@RequestParam(required = true) String nomeCategoria,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		Page<Topico> topicos = topicoRepository.findAll(paginacao);
+		Page<Topico> topicos = topicoRepository.findByCategoriaNome(nomeCategoria, paginacao);
 		return TopicoDto.converte(topicos);
 	}
 
@@ -58,7 +63,7 @@ public class TopicosController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<TopicoDto> cadastra(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
-		Topico topico = form.converte(usuarioRepository);
+		Topico topico = form.converte(categoriaRepository, usuarioRepository);
 		topicoRepository.save(topico);
 		URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 		return ResponseEntity.created(uri).body(new TopicoDto(topico));

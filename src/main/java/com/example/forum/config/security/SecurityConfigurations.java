@@ -46,9 +46,12 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 				.permitAll().antMatchers(HttpMethod.PUT, "/topicos/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/respostas").permitAll().antMatchers(HttpMethod.GET, "/respostas/*")
 				.permitAll().antMatchers(HttpMethod.POST, "/respostas").permitAll()
-				.antMatchers(HttpMethod.PUT, "/respostas/*").permitAll().antMatchers(HttpMethod.POST, "/auth")
-				.permitAll().antMatchers(HttpMethod.GET, "/actuator/**").permitAll().anyRequest().authenticated().and()
-				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.antMatchers(HttpMethod.PUT, "/respostas/*").permitAll().antMatchers(HttpMethod.GET, "/categorias")
+				.permitAll().antMatchers(HttpMethod.GET, "/categorias/*").permitAll()
+				.antMatchers(HttpMethod.POST, "/categorias").permitAll().antMatchers(HttpMethod.PUT, "/categorias/*")
+				.permitAll().antMatchers(HttpMethod.POST, "/auth").permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll().anyRequest().authenticated().and().csrf()
+				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 	}

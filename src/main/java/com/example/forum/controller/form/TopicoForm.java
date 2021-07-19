@@ -6,8 +6,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
+import com.example.forum.model.Categoria;
 import com.example.forum.model.Topico;
 import com.example.forum.model.Usuario;
+import com.example.forum.repository.CategoriaRepository;
 import com.example.forum.repository.UsuarioRepository;
 
 import lombok.Getter;
@@ -22,13 +24,17 @@ public class TopicoForm {
 	@NotBlank(message = "o campo mensagem está em branco")
 	@Size(min = 1, max = 1000, message = "o campo mensagem precisa ter entre {min} e {max} caracteres")
 	private String mensagem;
+	@PositiveOrZero(message = "O id da categoria não é válido")
+	private Long idCategoria;
 	@PositiveOrZero(message = "O id do usuário não é válido")
 	private Long idUsuario;
 
-	public Topico converte(UsuarioRepository usuarioRepository) {
+	public Topico converte(CategoriaRepository categoriaRepository, UsuarioRepository usuarioRepository) {
+		Optional<Categoria> optionalCategoria = categoriaRepository.findById(idCategoria);
+		Categoria categoria = optionalCategoria.get();
 		Optional<Usuario> optionalUsuario = usuarioRepository.findById(idUsuario);
 		Usuario usuario = optionalUsuario.get();
-		return new Topico(titulo, mensagem, usuario);
+		return new Topico(titulo, mensagem, categoria, usuario);
 	}
 
 }

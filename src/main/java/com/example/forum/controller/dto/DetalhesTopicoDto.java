@@ -1,9 +1,6 @@
 package com.example.forum.controller.dto;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.example.forum.model.Topico;
 
@@ -16,10 +13,11 @@ public class DetalhesTopicoDto {
 	private String mensagem;
 	private LocalDateTime dataCriacao;
 	private Boolean aberto;
+	private String nomeCategoria;
 	private String nomeUsuario;
 	private Byte nivelUsuario;
 	private Integer experienciaUsuario;
-	private List<RespostaDto> respostas;
+	private Integer numeroRespostas;
 
 	public DetalhesTopicoDto(Topico topico) {
 		this.id = topico.getId();
@@ -27,11 +25,11 @@ public class DetalhesTopicoDto {
 		this.mensagem = topico.getMensagem();
 		this.dataCriacao = topico.getDataCriacao();
 		this.aberto = topico.getAberto();
+		this.nomeCategoria = topico.getCategoria().getNome();
 		this.nomeUsuario = topico.getUsuario().getNome();
 		this.nivelUsuario = topico.getUsuario().getNivel();
 		this.experienciaUsuario = topico.getUsuario().getExperiencia();
-		this.respostas = new ArrayList<>();
-		this.respostas.addAll(topico.getRespostas().stream().map(RespostaDto::new).collect(Collectors.toList()));
+		this.numeroRespostas = topico.getRespostas().size();
 	}
 
 }
